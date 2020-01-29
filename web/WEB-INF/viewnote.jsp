@@ -13,6 +13,9 @@
     </head>
     <body>
         <h1>Simple Note Keeper</h1>
-        <h2>Hello World!</h2>
+        <h2>View Note</h2>
+        <div><b>Title</b></div>${titleView}
+        <div><b>Contents</b></div>${contentView}<br/>
+        <a href="note?edit">Edit</a>
     </body>
 </html>

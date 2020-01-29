@@ -14,5 +14,22 @@
     <body>
         <h1>Simple Note Keeper</h1>
         <h2>Edit Note</h2>
+        <form method="POST" action="/Web03Lab_SimpleNoteKeeper/note">
+            <table>
+                <tr>
+                    <td><b>Title:</b></td>
+                    <td><input type="text" name="title"></td>
+                </tr>
+                <tr>
+                    <td><b>Contents:</b></td>
+                    <td><textarea name="content"></textarea></td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="submit" value="SAVE">
+                    </td>
+                </tr>
+            </table>
+        </form>
     </body>
 </html>
