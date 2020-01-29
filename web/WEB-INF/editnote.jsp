@@ -18,11 +18,12 @@
             <table>
                 <tr>
                     <td><b>Title:</b></td>
-                    <td><input type="text" name="title"></td>
+                    
+                    <td><input type="text" name="title" value="${titleEdit}"></td>
                 </tr>
                 <tr>
                     <td><b>Contents:</b></td>
-                    <td><textarea name="content"></textarea></td>
+                    <td><textarea name="content">${contentEdit}</textarea></td>
                 </tr>
                 <tr>
                     <td>
