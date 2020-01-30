@@ -5,10 +5,13 @@
  */
 package servlets;
 
+import java.io.PrintWriter;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -20,7 +23,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author 794458
  */
 public class NoteServlet extends HttpServlet {
-private ArrayList<String> note;
+private ArrayList<String> note= new ArrayList<String>();
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -60,7 +63,7 @@ private ArrayList<String> note;
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //processRequest(request, response);
-        note = new ArrayList<String>();
+        
         
         
 System.out.println("GET Request: ");
@@ -68,7 +71,10 @@ response.setContentType("text/html;charset=UTF-8");
 String edit = request.getParameter("edit");
 if(edit!=null)
 {
-System.out.println("Edit Mode");    
+System.out.println("Edit Mode");
+//System.out.println(note.get(0)+note.get(1));
+request.setAttribute("titleEdit", note.get(0));
+request.setAttribute("contentEdit", note.get(1));
 getServletContext().getRequestDispatcher("/WEB-INF/editnote.jsp").forward(request, response);
 }
 else
@@ -82,11 +88,7 @@ else
     //request.setAttribute("titleView", note = br.readLine());
     while(note.size()<3)
     {
-        
-        //System.out.println(note);
-        note.add(br.readLine());
-        
-    
+         note.add(br.readLine());
     }
     
     request.setAttribute("titleView", note.get(0));
@@ -115,13 +117,27 @@ String edit = request.getParameter("edit");
 response.setContentType("text/html;charset=UTF-8");
 //String title = request.getParameter("title");
 //String content = request.getParameter("content");
-if(edit!=null)
-{
-    System.out.println("Edit is set!") ;
+//if(edit==null)
+//{
+    String path = getServletContext().getRealPath("/WEB-INF/note.txt");
+    PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(path, false)));
+    String title = request.getParameter("title");
+    String content = request.getParameter("content");
+    //System.out.println(title+" "+content);
+    pw.println(title);
+    pw.println(content);
+    pw.close();
     
-    request.setAttribute("title", note.get(0));
-    request.setAttribute("content", note.get(1));
-}
+    note.set(0, title);
+    note.set(1, content);
+    request.setAttribute("titleView", note.get(0));
+    request.setAttribute("contentView", note.get(1));
+    
+//}
+//else
+//{
+    
+//}
         //System.out.println("Title: "+title);
         //System.out.println("Contents: "+content);
  
